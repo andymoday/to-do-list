@@ -37,3 +37,43 @@ class Todo {
     setTodoDueDate(newDueDate) {this.todoDueDate = newDueDate; return this.todoDueDate}
     setTodoProject(newProject) {this.todoProject = newProject; return this.todoProject} 
 }
+
+const projectsModule = (function(){
+    let projects = [];
+    getProjects: function getProjects(){
+        return projects;
+    }
+    addProject: function addProject(project){
+        projects.push(project)
+        return projects;
+    } 
+    delProject: function delProject(project){
+        let i = projects.indexOf(project);
+        projects.splice(i,1)
+        return projects;
+}   
+    return {getProjects, 
+            addProject, 
+            delProject
+            }
+})();
+
+const todosModule = (function(){
+    let todos = [];
+    gettodos: function getTodos(){
+        return todos;
+    }
+    addTodo: function addTodo(todo){
+        todos.push(todo)
+        return todos;
+    } 
+    delTodo: function delTodo(todo){
+        let i = todos.indexOf(todo);
+        todos.splice(i,1)
+        return todos;
+}   
+    return {getTodos, 
+            addTodo, 
+            delTodo
+            }
+})();
