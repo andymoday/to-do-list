@@ -1,3 +1,5 @@
+import {projectDisplay} from './DOM-update.js'
+
 class Project {
     constructor (name, desc, priority, dueDate, todos) {
         this.projectName = name;
@@ -40,14 +42,14 @@ class Todo {
 
 const projectsModule = (function(){
     let projects = [];
-    getProjects: function getProjects(){
+    function getProjects(){
         return projects;
     }
-    addProject: function addProject(project){
+    function addProject(project){
         projects.push(project)
         return projects;
     } 
-    delProject: function delProject(project){
+    function delProject(project){
         let i = projects.indexOf(project);
         projects.splice(i,1)
         return projects;
@@ -60,14 +62,14 @@ const projectsModule = (function(){
 
 const todosModule = (function(){
     let todos = [];
-    gettodos: function getTodos(){
+    function getTodos(){
         return todos;
     }
-    addTodo: function addTodo(todo){
+    function addTodo(todo){
         todos.push(todo)
         return todos;
     } 
-    delTodo: function delTodo(todo){
+    function delTodo(todo){
         let i = todos.indexOf(todo);
         todos.splice(i,1)
         return todos;
@@ -77,3 +79,28 @@ const todosModule = (function(){
             delTodo
             }
 })();
+
+const addProjectToArray = function(name, desc, priority, dueDate) {
+    let newProject = new Project(name, desc, priority, dueDate)
+    projectsModule.addProject(newProject)
+}
+
+function addProject() {        //form submission for project
+
+    let project_name = document.getElementById('p-name').value;
+    let project_priority = document.getElementById('p-priority').value;
+    let project_description = document.getElementById('p-description').value;
+    let project_dueDate = document.getElementById('p-dueDate').value
+    addProjectToArray(project_name,project_priority,project_description,project_dueDate);
+    let proIndex = projectsModule.getProjects.length; 
+    projectDisplay(proIndex);
+    
+    document.getElementById('p-name').value = null
+    document.getElementById('p-priority').value = null
+    document.getElementById('p-description').value = null
+    document.getElementById('p-dueDate').value = null
+    
+    return false;//It's important to return false; to prevent default behaviour at the end of your submit handler, as otherwise the form will post and reload the page.
+}
+
+export {Project, addProject,projectsModule}
