@@ -91,16 +91,18 @@ function addProject() {        //form submission for project
     let project_priority = document.getElementById('p-priority').value;
     let project_description = document.getElementById('p-description').value;
     let project_dueDate = document.getElementById('p-dueDate').value
-    addProjectToArray(project_name,project_priority,project_description,project_dueDate);
-    let proIndex = projectsModule.getProjects.length; 
-    projectDisplay(proIndex);
-    
-    document.getElementById('p-name').value = null
-    document.getElementById('p-priority').value = null
-    document.getElementById('p-description').value = null
-    document.getElementById('p-dueDate').value = null
-    
+    addProjectToArray(project_name,project_description,project_priority,project_dueDate);
+    let arr = projectsModule.getProjects(); 
+    let index = arr.length -1
+    projectDisplay(index);
+    formReset()
     return false;//It's important to return false; to prevent default behaviour at the end of your submit handler, as otherwise the form will post and reload the page.
 }
 
-export {Project, addProject,projectsModule}
+function formReset() {
+    document.getElementById('p-name').value = null
+    document.getElementById('p-priority').value = 'Low'
+    document.getElementById('p-description').value = null
+    document.getElementById('p-dueDate').value = null
+}
+export {addProject,projectsModule,formReset}

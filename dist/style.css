@@ -60,6 +60,10 @@ table {
 }
 
 #project-container {
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-gap: 10px;
 	width: 90vw;
 	height: 90vw;
 	background-color: cadetblue;
@@ -163,7 +167,9 @@ table {
 
 
   .project{
-	  height:50px;
-	  width: 50px;
+	  margin: 10px;
+	  border-radius: 5px;
 	  background: white;
+	  display:grid;
+	  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   }
